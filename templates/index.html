@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block content %}
+<ul class="nav nav-tabs mb-4" id="calcTabs" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="tip-tab" data-bs-toggle="tab" data-bs-target="#tip" type="button" role="tab">Tip Split</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="bmi-tab" data-bs-toggle="tab" data-bs-target="#bmi" type="button" role="tab">BMI</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="interest-tab" data-bs-toggle="tab" data-bs-target="#interest" type="button" role="tab">Simple Interest</button>
+  </li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane fade show active" id="tip" role="tabpanel">
+    <h4>Tip &amp; Bill Split</h4>
+    <form method="post" class="row g-3">
+      <input type="hidden" name="calc_type" value="tip">
+      <div class="col-md-4">
+        <label class="form-label">Bill Total</label>
+        <input type="number" step="0.01" name="bill" class="form-control" required>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Tip %</label>
+        <input type="number" name="tip_pct" class="form-control" value="15" required>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label"># of People</label>
+        <input type="number" name="people" class="form-control" value="1" min="1" required>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Calculate</button>
+      </div>
+    </form>
+    {% if tip_result %}
+      <div class="mt-3">
+        <ul class="list-group">
+          <li class="list-group-item">Tip: ${{ tip_result.tip }}</li>
+          <li class="list-group-item">Total: ${{ tip_result.total }}</li>
+          <li class="list-group-item">Per Person: ${{ tip_result.per_person }}</li>
+        </ul>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="tab-pane fade" id="bmi" role="tabpanel">
+    <h4>BMI Calculator</h4>
+    <form method="post" class="row g-3">
+      <input type="hidden" name="calc_type" value="bmi">
+      <div class="col-md-6">
+        <label class="form-label">Weight</label>
+        <input type="number" step="0.1" name="weight" class="form-control" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Height</label>
+        <input type="number" step="0.1" name="height" class="form-control" required>
+      </div>
+      <div class="col-md-12">
+        <label class="form-label">Unit</label>
+        <select name="unit" class="form-select">
+          <option value="metric">kg &amp; cm</option>
+          <option value="imperial">lbs &amp; in</option>
+        </select>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Calculate BMI</button>
+      </div>
+    </form>
+    {% if bmi_result %}
+      <div class="mt-3">
+        <p class="result-text">Your BMI is <strong>{{ bmi_result.bmi }}</strong> ({{ bmi_result.category }})</p>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="tab-pane fade" id="interest" role="tabpanel">
+    <h4>Simple Interest</h4>
+    <form method="post" class="row g-3">
+      <input type="hidden" name="calc_type" value="interest">
+      <div class="col-md-4">
+        <label class="form-label">Principal</label>
+        <input type="number" step="0.01" name="principal" class="form-control" required>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Rate % (annual)</label>
+        <input type="number" step="0.01" name="rate" class="form-control" required>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Time (years)</label>
+        <input type="number" step="0.1" name="time" class="form-control" required>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Calculate Interest</button>
+      </div>
+    </form>
+    {% if interest_result %}
+      <div class="mt-3">
+        <ul class="list-group">
+          <li class="list-group-item">Interest: ${{ interest_result.interest }}</li>
+          <li class="list-group-item">Total Amount: ${{ interest_result.total }}</li>
+        </ul>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

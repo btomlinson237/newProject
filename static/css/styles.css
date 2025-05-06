@@ -1,0 +1,72 @@
+:root {
+  --bg-color: #121212;
+  --card-bg: #1e1e1e;
+  --text-color: #e0e0e0;
+  --accent-color: #bb86fc;
+  --button-bg: #bb86fc;
+  --button-hover: #9b6cd4;
+  --input-bg: #2a2a2a;
+  --input-border: #444;
+}
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.navbar-nav .nav-link {
+  font-size: 1.1rem;
+  margin: 0 1rem;
+}
+.nav-link.active {
+  color: var(--accent-color) !important;
+}
+
+/* Card */
+.form-card {
+  background-color: var(--card-bg);
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+/* Uniform Inputs */
+.input-field {
+  width: 100%;
+  height: 2.5rem;
+  background-color: var(--input-bg) !important;
+  border: 1px solid var(--input-border) !important;
+  padding: 0.5rem !important;
+  color: var(--text-color) !important;
+}
+.form-floating > label {
+  color: #aaa !important;
+}
+.input-field:focus {
+  border-color: var(--accent-color) !important;
+  box-shadow: none;
+}
+
+/* Button */
+.btn-accent {
+  background-color: var(--button-bg) !important;
+  border: none;
+  color: var(--bg-color) !important;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  transition: background-color 0.3s;
+}
+.btn-accent:hover {
+  background-color: var(--button-hover) !important;
+}
+
+/* Results */
+.result p {
+  margin: 0.5rem 0;
+}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block page_title %}Tip &amp; Bill Split Calculator{% endblock %}
+{% block content %}
+<div x-data="tipCalc()" class="card p-4 form-card">
+  <div class="form-floating mb-3">
+    <input type="number" x-model.number="bill" class="form-control input-field" id="bill" placeholder="Bill Total">
+    <label for="bill">Bill Total ($)</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="number" x-model.number="pct" min="0" max="100" class="form-control input-field" id="pct" placeholder="Tip Percentage">
+    <label for="pct">Tip %</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="number" x-model.number="people" class="form-control input-field" id="people" placeholder="# of People">
+    <label for="people"># of People</label>
+  </div>
+  <button class="btn btn-accent btn-lg mb-3" @click="calculate()">Calculate</button>
+  <template x-if="total">
+    <div class="result text-start">
+      <p><strong>Tip:</strong> $<span x-text="tip.toFixed(2)"></span></p>
+      <p><strong>Total:</strong> $<span x-text="total.toFixed(2)"></span></p>
+      <p><strong>Per Person:</strong> $<span x-text="perPerson.toFixed(2)"></span></p>
+    </div>
+  </template>
+</div>
+{% endblock %}
