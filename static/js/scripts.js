@@ -1,3 +1,5 @@
+//scripts.js
+
 // Alpine.js component definitions
 document.addEventListener('alpine:init', () => {
   Alpine.data('tipCalc', () => ({
