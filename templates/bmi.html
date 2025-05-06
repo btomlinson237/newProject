@@ -3,7 +3,7 @@
 {% extends 'base.html' %}
 {% block page_title %}Body Mass Index (BMI) Calculator{% endblock %}
 {% block content %}
-<div x-data="bmiCalc()" class="card p-4 form-card">
+<div x-data="bmiCalc()" class="form-card">
   <div class="form-floating mb-3">
     <input type="number" x-model.number="weight" class="form-control input-field" id="weight" placeholder="Weight">
     <label for="weight">Weight</label>
@@ -14,15 +14,15 @@
   </div>
   <div class="mb-3 text-start">
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="unit" id="metric" value="metric" x-model="unit">
+      <input class="form-check-input" type="radio" x-model="unit" id="metric" value="metric">
       <label class="form-check-label" for="metric">kg / m</label>
     </div>
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="unit" id="imperial" value="imperial" x-model="unit">
+      <input class="form-check-input" type="radio" x-model="unit" id="imperial" value="imperial">
       <label class="form-check-label" for="imperial">lbs / in</label>
     </div>
   </div>
-  <button class="btn btn-accent btn-lg mb-3" @click="calculate()">Calculate</button>
+  <button class="btn btn-accent mb-3" @click="calculate()">Calculate</button>
   <template x-if="bmi">
     <div class="result text-start">
       <p><strong>BMI:</strong> <span x-text="bmi"></span></p>
