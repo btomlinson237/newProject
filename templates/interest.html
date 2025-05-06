@@ -5,15 +5,15 @@
 {% block content %}
 <div x-data="interestCalc()" class="form-card">
   <div class="form-floating mb-3">
-    <input type="number" x-model.number="principal" class="form-control input-field" id="principal" placeholder="Principal">
+    <input type="number" x-model.number="principal" class="form-control input-field" id="principal" placeholder=" ">
     <label for="principal">Principal ($)</label>
   </div>
   <div class="form-floating mb-3">
-    <input type="number" x-model.number="rate" class="form-control input-field" id="rate" placeholder="Rate">
+    <input type="number" x-model.number="rate" class="form-control input-field" id="rate" placeholder=" ">
     <label for="rate">Rate (%)</label>
   </div>
   <div class="form-floating mb-3">
-    <input type="number" x-model.number="time" class="form-control input-field" id="time" placeholder="Time">
+    <input type="number" x-model.number="time" class="form-control input-field" id="time" placeholder=" ">
     <label for="time">Time (years)</label>
   </div>
   <button class="btn btn-accent mb-3" @click="calculate()">Calculate</button>

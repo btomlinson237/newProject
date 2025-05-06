@@ -5,15 +5,15 @@
 {% block content %}
 <div x-data="tipCalc()" class="form-card">
   <div class="form-floating mb-3">
-    <input type="number" x-model.number="bill" class="form-control input-field" id="bill" placeholder="Bill Total">
+    <input type="number" x-model.number="bill" class="form-control input-field" id="bill" placeholder=" ">
     <label for="bill">Bill Total ($)</label>
   </div>
   <div class="form-floating mb-3">
-    <input type="number" x-model.number="pct" min="0" max="100" class="form-control input-field" id="pct" placeholder="Tip Percentage">
+    <input type="number" x-model.number="pct" min="0" max="100" class="form-control input-field" id="pct" placeholder=" ">
     <label for="pct">Tip %</label>
   </div>
   <div class="form-floating mb-3">
-    <input type="number" x-model.number="people" class="form-control input-field" id="people" placeholder="# of People">
+    <input type="number" x-model.number="people" class="form-control input-field" id="people" placeholder=" ">
     <label for="people"># of People</label>
   </div>
   <button class="btn btn-accent mb-3" @click="calculate()">Calculate</button>
