@@ -76,3 +76,20 @@ body {
 .form-control::placeholder {
   color: transparent !important;
 }
+
+/* Match floating-label background to the card, not white */
+.form-floating > label {
+  background-color: var(--card-bg) !important;
+  padding: 0 0.25rem;          /* give the label a little breathing room */
+}
+
+/* Ensure the input itself stays dark */
+.form-floating > .form-control,
+.form-floating > .input-field {
+  background-color: var(--input-bg) !important;
+  color: var(--text-color)   !important;
+}
+
+.form-floating > .form-control::placeholder {
+  color: transparent !important;
+}

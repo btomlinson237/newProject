@@ -4,19 +4,36 @@
 {% block page_title %}Simple Interest Calculator{% endblock %}
 {% block content %}
 <div x-data="interestCalc()" class="form-card">
-  <div class="form-floating mb-3">
-    <input type="number" x-model.number="principal" class="form-control input-field" id="principal" placeholder=" ">
-    <label for="principal">Principal ($)</label>
+
+  <div class="mb-3">
+    <label for="principal" class="form-label">Principal ($)</label>
+    <input
+      type="number"
+      id="principal"
+      x-model.number="principal"
+      class="form-control input-field">
   </div>
-  <div class="form-floating mb-3">
-    <input type="number" x-model.number="rate" class="form-control input-field" id="rate" placeholder=" ">
-    <label for="rate">Rate (%)</label>
+
+  <div class="mb-3">
+    <label for="rate" class="form-label">Rate % (annual)</label>
+    <input
+      type="number"
+      id="rate"
+      x-model.number="rate"
+      class="form-control input-field">
   </div>
-  <div class="form-floating mb-3">
-    <input type="number" x-model.number="time" class="form-control input-field" id="time" placeholder=" ">
-    <label for="time">Time (years)</label>
+
+  <div class="mb-3">
+    <label for="time" class="form-label">Time (years)</label>
+    <input
+      type="number"
+      id="time"
+      x-model.number="time"
+      class="form-control input-field">
   </div>
+
   <button class="btn btn-accent mb-3" @click="calculate()">Calculate</button>
+
   <template x-if="total">
     <div class="result text-start">
       <p><strong>Interest:</strong> $<span x-text="interest"></span></p>
@@ -25,3 +42,4 @@
   </template>
 </div>
 {% endblock %}
+

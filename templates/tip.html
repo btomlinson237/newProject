@@ -1,22 +1,40 @@
 <!--tip.html-->
 
 {% extends 'base.html' %}
-{% block page_title %}Tip &amp; Bill Split Calculator{% endblock %}
+{% block page_title %}Tip & Bill Split Calculator{% endblock %}
 {% block content %}
 <div x-data="tipCalc()" class="form-card">
-  <div class="form-floating mb-3">
-    <input type="number" x-model.number="bill" class="form-control input-field" id="bill" placeholder=" ">
-    <label for="bill">Bill Total ($)</label>
+
+  <div class="mb-3">
+    <label for="bill" class="form-label">Bill Total ($)</label>
+    <input
+      type="number"
+      id="bill"
+      x-model.number="bill"
+      class="form-control input-field">
   </div>
-  <div class="form-floating mb-3">
-    <input type="number" x-model.number="pct" min="0" max="100" class="form-control input-field" id="pct" placeholder=" ">
-    <label for="pct">Tip %</label>
+
+  <div class="mb-3">
+    <label for="pct" class="form-label">Tip %</label>
+    <input
+      type="number"
+      id="pct"
+      x-model.number="pct"
+      min="0" max="100"
+      class="form-control input-field">
   </div>
-  <div class="form-floating mb-3">
-    <input type="number" x-model.number="people" class="form-control input-field" id="people" placeholder=" ">
-    <label for="people"># of People</label>
+
+  <div class="mb-3">
+    <label for="people" class="form-label"># of People</label>
+    <input
+      type="number"
+      id="people"
+      x-model.number="people"
+      class="form-control input-field">
   </div>
+
   <button class="btn btn-accent mb-3" @click="calculate()">Calculate</button>
+
   <template x-if="total">
     <div class="result text-start">
       <p><strong>Tip:</strong> $<span x-text="tip.toFixed(2)"></span></p>
@@ -26,3 +44,4 @@
   </template>
 </div>
 {% endblock %}
+
