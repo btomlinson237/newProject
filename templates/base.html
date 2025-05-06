@@ -12,7 +12,7 @@
 </head>
 <body class="bg-dark text-white d-flex flex-column min-vh-100">
 
-  <!-- Horizontal Bootstrap navbar -->
+  <!-- Horizontal Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
     <div class="container">
       <a class="navbar-brand" href="{{ url_for('tip') }}">Bobby's Calculators</a>
@@ -41,18 +41,17 @@
     </div>
   </nav>
 
-  <!-- Centered titles -->
+  <!-- Centered Titles -->
   <header class="text-center mt-4 mb-4">
     <h1 class="display-4">Bobby's Calculators</h1>
     <h2 class="h4">{% block page_title %}{% endblock %}</h2>
   </header>
 
-  <!-- Centered main content -->
+  <!-- Centered Content -->
   <main class="container flex-fill d-flex flex-column justify-content-start align-items-center">
     {% block content %}{% endblock %}
   </main>
 
-  <!-- Footer -->
   <footer class="text-center py-3 mt-auto">
     <small>&copy; 2025 Bobby's Calculators</small>
   </footer>
