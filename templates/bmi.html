@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 {% block page_title %}Body Mass Index (BMI) Calculator{% endblock %}
 {% block content %}
+
+<!-- Intro sales-pitch -->
+<div class="mb-4 text-center">
+  <p class="lead">
+    Wondering where you stand on the body mass index scale? Enter your weight
+    and height (in metric or imperial units) to instantly see your BMI and
+    a simple health category: underweight, normal, overweight, or obese.
+  </p>
+</div>
+
 <div x-data="bmiCalc()" class="form-card">
 
   <!-- Weight -->

@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 {% block page_title %}Simple Interest Calculator{% endblock %}
 {% block content %}
+
+<!-- Intro sales-pitch -->
+<div class="mb-4 text-center">
+  <p class="lead">
+    Planning a loan or investment? Use this simple interest calculator to find
+    out how much interest you’ll earn—or owe—over time. Enter principal, rate,
+    and years to see your total growth at a glance.
+  </p>
+</div>
+
 <div x-data="interestCalc()" class="form-card">
 
   <!-- Principal -->

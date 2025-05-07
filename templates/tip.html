@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% block page_title %}Tip & Bill Split Calculator{% endblock %}
 {% block content %}
+
+<!-- Intro sales-pitch -->
+<div class="mb-4 text-center">
+  <p class="lead">
+    As dinner ends and the check arrives, it’s time to sort the tip and who pays what. Enter your total, tip percentage, and head count—and get each person’s share instantly.
+  </p>
+</div>
+
 <div x-data="tipCalc()" class="form-card">
 
   <!-- Bill Total -->
