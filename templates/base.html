@@ -1,18 +1,22 @@
-<!--base.html-->
-
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- Inter font -->
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet">
 
-  <link rel="icon" type="image/png" sizes="64x64" href="{{ url_for('static', filename='img/favicon.png')}}">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="64x64"
+        href="{{ url_for('static', filename='img/favicon.png') }}">
+
   <!-- Bootstrap CSS from CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"  rel="stylesheet">
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet">
 
   <!-- Your custom styles -->
   <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
@@ -20,13 +24,13 @@
   <title>Bobby's Calculators</title>
 </head>
 
-<body class="bg-dark text-white d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100">
 
   <!-- Alpine-powered navbar -->
   <nav x-data="{ open: false }" class="navbar navbar-expand-lg navbar-dark bg-secondary">
     <div class="container">
       <a class="navbar-brand" href="{{ url_for('tip') }}">
-        <img src="{{ url_for('static', filename='img/favicon.png')}}" alt="BT Logo">
+        <img src="{{ url_for('static', filename='img/favicon.png') }}" alt="BT Logo">
         Bobby's Calculators
       </a>
       <button
@@ -59,14 +63,23 @@
           </li>
         </ul>
       </div>
+
+      <!-- Theme toggle switch -->
+      <div class="form-check form-switch text-white ms-3">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="themeToggle"
+        >
+        <label class="form-check-label" for="themeToggle">Light</label>
+      </div>
     </div>
   </nav>
 
-  <!-- Centered Titles -->
+  <!-- Page Title -->
   <header class="text-center mt-4 mb-4">
     <h1 class="display-4">{% block page_title %}{% endblock %}</h1>
   </header>
-
 
   <!-- Main Content -->
   <main class="container flex-fill d-flex flex-column justify-content-start align-items-center">
@@ -77,14 +90,9 @@
     <small>&copy; 2025 Bobby's Calculators</small>
   </footer>
 
-
-
-
-
-  <!-- Alpine.js (still via CDN or local, as you prefer) -->
+  <!-- Alpine.js -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-  <!-- Your custom scripts -->
+  <!-- Your custom Alpine components & theme-toggle logic -->
   <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 </html>

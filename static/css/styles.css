@@ -126,3 +126,57 @@ footer {
 /* 10. Utility classes */
 .text-white { color: var(--text-primary) !important; }
 .bg-dark { background-color: var(--bg-color) !important; }
+
+
+
+[data-theme="light"] {
+--bg-color:       #f8f9fa;  /* light grey background */
+--panel-bg:       #ffffff;  /* white cards */
+--text-primary:   #212529;  /* dark text */
+--text-secondary: #495057;  /* muted grey */
+--input-bg:       #ffffff;  /* inputs white */
+--input-border:   #ced4da;  /* light bootstrap border */
+/* keep the same brand accent */
+--accent:         #5BC0EB;
+--accent-dark:    #4AA0CC;
+}
+
+/* — Light mode navbar & toggle fixes — */
+[data-theme="light"] {
+  /* ensure text switches to dark */
+  color: var(--text-primary) !important;
+}
+
+/* Navbar background in light mode */
+[data-theme="light"] .navbar {
+  background-color: var(--panel-bg) !important;
+}
+
+/* Nav links in light mode */
+[data-theme="light"] .navbar-nav .nav-link {
+  color: var(--text-primary) !important;
+}
+[data-theme="light"] .navbar-nav .nav-link:hover {
+  background-color: rgba(91,192,235,0.1) !important;
+}
+
+/* Theme-switch label color */
+[data-theme="light"] .form-check-label {
+  color: var(--text-secondary) !important;
+}
+
+/* Invert the white hamburger icon to dark */
+[data-theme="light"] .navbar-toggler-icon {
+  filter: invert(1);
+}
+
+/* Light‐mode navbar text */
+html[data-theme="light"] .navbar-brand,
+html[data-theme="light"] .navbar-nav .nav-link {
+  color: var(--text-primary) !important;
+}
+
+/* Ensure the toggle label also flips */
+html[data-theme="light"] .form-check-label {
+  color: var(--text-secondary) !important;
+}
