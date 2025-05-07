@@ -1,95 +1,128 @@
-/* styles.css */
-
+/* 1. Base variables & font */
 :root {
-  --bg-color: #121212;
-  --card-bg: #1e1e1e;
-  --text-color: #e0e0e0;
-  --accent-color: #bb86fc;
-  --button-bg: #bb86fc;
-  --button-hover: #9b6cd4;
-  --input-bg: #2a2a2a;
-  --input-border: #444;
+  --bg-color: #0D0D0F;           /* darkest background */
+  --panel-bg: #1A1A1D;           /* cards, panels */
+  --text-primary: #FFFFFF;       /* main text */
+  --text-secondary: #B3B3B3;     /* muted text */
+  --accent: #5BC0EB;             /* pale-blue logo color */
+  --accent-dark: #4AA0CC;        /* hover/dark variant */
+  --input-bg: #232327;           /* input backgrounds */
+  --input-border: #3A3A3E;       /* input borders */
 }
+
 body {
+  margin: 0;
   background-color: var(--bg-color);
-  color: var(--text-color);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* 2. Navbar */
+.navbar {
+  background-color: var(--panel-bg) !important;
 }
 .navbar-brand {
-  font-size: 1.5rem;
   font-weight: 600;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+}
+.navbar-brand img {
+  height: 1.5rem;
+  margin-right: 0.5rem;
 }
 .navbar-nav .nav-link {
-  font-size: 1.1rem;
-  margin: 0 1rem;
+  color: var(--text-primary) !important;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+}
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+  background-color: rgba(91, 192, 235, 0.1);
+  border-radius: 0.25rem;
 }
 .nav-link.active {
-  color: var(--accent-color) !important;
+  color: var(--accent) !important;
 }
 
-/* Card */
+/* 3. Headers */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+.display-4 {
+  font-weight: 700;
+}
+
+/* 4. Form cards */
 .form-card {
-  background-color: var(--card-bg);
-  border-radius: 1rem;
+  background-color: var(--panel-bg);
+  border-radius: 0.75rem;
   padding: 2rem;
-  width: 100%;
+  width: 90%;
   max-width: 600px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.7);
   margin-bottom: 2rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
 
-/* Uniform Inputs */
+/* 5. Form controls */
 .input-field {
-  width: 100%;
-  height: 2.5rem;
   background-color: var(--input-bg) !important;
   border: 1px solid var(--input-border) !important;
-  padding: 0.5rem !important;
-  color: var(--text-color) !important;
-}
-.form-floating > label {
-  color: #aaa !important;
+  color: var(--text-primary) !important;
+  padding: 0.75rem !important;
+  border-radius: 0.375rem !important;
+  font-size: 1rem;
 }
 .input-field:focus {
-  border-color: var(--accent-color) !important;
-  box-shadow: none;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 0.25rem rgba(91,192,235,0.3) !important;
+}
+.form-label {
+  color: var(--text-secondary) !important;
+  font-weight: 500;
 }
 
-/* Button */
+/* 6. Buttons */
 .btn-accent {
-  background-color: var(--button-bg) !important;
-  border: none;
+  background-color: var(--accent) !important;
   color: var(--bg-color) !important;
-  width: 100%;
+  font-weight: 600;
+  border-radius: 0.375rem;
   padding: 0.75rem;
-  font-size: 1.1rem;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s ease;
 }
-.btn-accent:hover {
-  background-color: var(--button-hover) !important;
+.btn-accent:hover,
+.btn-accent:focus {
+  background-color: var(--accent-dark) !important;
 }
 
-/* Results */
+/* 7. Links */
+a {
+  color: var(--accent);
+}
+a:hover {
+  color: var(--accent-dark);
+  text-decoration: none;
+}
+
+/* 8. Calculator results */
 .result p {
   margin: 0.5rem 0;
+  color: var(--text-primary);
 }
 
-.form-control::placeholder {
-  color: transparent !important;
+/* 9. Footer */
+footer {
+  margin-top: auto;
+  background-color: var(--panel-bg);
+  color: var(--text-secondary);
+  padding: 1rem 0;
+  text-align: center;
 }
 
-/* Match floating-label background to the card, not white */
-.form-floating > label {
-  background-color: var(--card-bg) !important;
-  padding: 0 0.25rem;          /* give the label a little breathing room */
-}
-
-/* Ensure the input itself stays dark */
-.form-floating > .form-control,
-.form-floating > .input-field {
-  background-color: var(--input-bg) !important;
-  color: var(--text-color)   !important;
-}
-
-.form-floating > .form-control::placeholder {
-  color: transparent !important;
-}
+/* 10. Utility classes */
+.text-white { color: var(--text-primary) !important; }
+.bg-dark { background-color: var(--bg-color) !important; }
