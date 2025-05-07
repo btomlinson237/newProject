@@ -1,12 +1,10 @@
-#app.py
-
 from flask import Flask, render_template, redirect, url_for
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return redirect(url_for('tip'))
+    return render_template('home.html')
 
 @app.route('/tip')
 def tip():

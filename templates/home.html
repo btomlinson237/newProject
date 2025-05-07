@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block page_title %}Welcome to Bobby’s Calculators{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5">
+  <h2 class="mb-3">All your favorite quick‐access calculators in one place.</h2>
+  <p class="lead mb-4">
+    From splitting the check to checking your BMI or computing simple interest -
+    choose a tool below to get started in seconds!
+  </p>
+  <div class="d-flex justify-content-center flex-wrap gap-3">
+    <a href="{{ url_for('tip') }}" class="btn btn-accent btn-lg">
+      Tip &amp; Bill Split
+    </a>
+    <a href="{{ url_for('bmi') }}" class="btn btn-accent btn-lg">
+      BMI Calculator
+    </a>
+    <a href="{{ url_for('interest') }}" class="btn btn-accent btn-lg">
+      Simple Interest
+    </a>
+  </div>
+</div>
+{% endblock %}
