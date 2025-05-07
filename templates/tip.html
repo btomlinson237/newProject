@@ -1,40 +1,69 @@
-<!--tip.html-->
-
 {% extends 'base.html' %}
 {% block page_title %}Tip & Bill Split Calculator{% endblock %}
 {% block content %}
 <div x-data="tipCalc()" class="form-card">
 
+  <!-- Bill Total -->
   <div class="mb-3">
     <label for="bill" class="form-label">Bill Total ($)</label>
     <input
       type="number"
       id="bill"
       x-model.number="bill"
-      class="form-control input-field">
+      @blur="touchedBill = true"
+      min="0"
+      class="form-control input-field"
+      :class="{ 'is-invalid': touchedBill && bill <= 0 }"
+    >
+    <div class="invalid-feedback" x-show="touchedBill && bill <= 0">
+      Please enter a positive bill amount.
+    </div>
   </div>
 
+  <!-- Tip % -->
   <div class="mb-3">
     <label for="pct" class="form-label">Tip %</label>
     <input
       type="number"
       id="pct"
       x-model.number="pct"
+      @blur="touchedPct = true"
       min="0" max="100"
-      class="form-control input-field">
+      class="form-control input-field"
+      :class="{ 'is-invalid': touchedPct && (pct < 0 || pct > 100) }"
+    >
+    <div class="invalid-feedback" x-show="touchedPct && (pct < 0 || pct > 100)">
+      Tip must be between 0% and 100%.
+    </div>
   </div>
 
+  <!-- # of People -->
   <div class="mb-3">
     <label for="people" class="form-label"># of People</label>
     <input
       type="number"
       id="people"
       x-model.number="people"
-      class="form-control input-field">
+      @blur="touchedPeople = true"
+      min="1"
+      class="form-control input-field"
+      :class="{ 'is-invalid': touchedPeople && people < 1 }"
+    >
+    <div class="invalid-feedback" x-show="touchedPeople && people < 1">
+      Number of people must be at least 1.
+    </div>
   </div>
 
-  <button class="btn btn-accent mb-3" @click="calculate()">Calculate</button>
+  <!-- Calculate -->
+  <button
+    class="btn btn-accent mb-3"
+    @click="calculate()"
+    :disabled="!isValid"
+  >
+    Calculate
+  </button>
 
+  <!-- Results -->
   <template x-if="total">
     <div class="result text-start">
       <p><strong>Tip:</strong> $<span x-text="tip.toFixed(2)"></span></p>
@@ -44,4 +73,3 @@
   </template>
 </div>
 {% endblock %}
-
