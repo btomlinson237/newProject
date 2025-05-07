@@ -3,6 +3,7 @@
 // — Alpine component registrations —
 document.addEventListener('alpine:init', () => {
   Alpine.data('tipCalc', () => ({
+    // — state —
     bill:          null,
     pct:           15,
     people:        1,
@@ -13,6 +14,10 @@ document.addEventListener('alpine:init', () => {
     total:         0,
     perPerson:     0,
 
+    // ← new history array
+    history: [],
+
+    // — validity check —
     get isValid() {
       return (
         this.bill   >  0 &&
@@ -22,14 +27,26 @@ document.addEventListener('alpine:init', () => {
       );
     },
 
+    // — action —
     calculate() {
       this.tip       = (this.bill || 0) * (this.pct / 100);
       this.total     = (this.bill || 0) + this.tip;
       this.perPerson = this.people > 0
         ? this.total / this.people
         : 0;
+
+      // ← record this result
+      this.history.push({
+        bill:       this.bill,
+        pct:        this.pct,
+        people:     this.people,
+        tip:        this.tip.toFixed(2),
+        total:      this.total.toFixed(2),
+        perPerson:  this.perPerson.toFixed(2)
+      });
     }
   }));
+
 
   Alpine.data('bmiCalc', () => ({
     weight:   null,

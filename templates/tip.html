@@ -71,5 +71,23 @@
       <p><strong>Per Person:</strong> $<span x-text="perPerson.toFixed(2)"></span></p>
     </div>
   </template>
+
+  <template x-if="history.length">
+    <div class="mt-3 w-100">
+      <h5>History</h5>
+      <ul class="list-group">
+        <template x-for="(entry, idx) in history" :key="idx">
+          <li class="list-group-item bg-secondary text-white">
+            Bill: $<span x-text="entry.bill"></span>,
+            Tip: <span x-text="entry.pct"></span>%,
+            People: <span x-text="entry.people"></span> →
+            Tip $<span x-text="entry.tip"></span>,
+            Total $<span x-text="entry.total"></span>,
+            /Person $<span x-text="entry.perPerson"></span>
+          </li>
+        </template>
+      </ul>
+    </div>
+  </template>
 </div>
 {% endblock %}
