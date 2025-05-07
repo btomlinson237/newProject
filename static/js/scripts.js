@@ -49,12 +49,22 @@ document.addEventListener('alpine:init', () => {
 
 
   Alpine.data('bmiCalc', () => ({
-    weight:   null,
-    height:   null,
-    unit:     'metric',
-    bmi:      null,
-    category: '',
+    weight:        null,
+    height:        null,
+    unit:          'metric',
+    touchedWeight: false,
+    touchedHeight: false,
+    bmi:           null,
+    category:      '',
+    history:       [],
+
+    // valid only when both inputs > 0
+    get isValid() {
+      return this.weight > 0 && this.height > 0;
+    },
+
     calculate() {
+      // compute bmi & category
       let w = this.weight || 0;
       let h = this.height || 0;
       if (this.unit === 'imperial') {
@@ -67,21 +77,49 @@ document.addEventListener('alpine:init', () => {
                        : b < 25   ? 'Normal'
                        : b < 30   ? 'Overweight'
                        : 'Obese';
+
+      // record into history
+      this.history.push({
+        weight:   this.weight,
+        height:   this.height,
+        unit:     this.unit,
+        bmi:      this.bmi,
+        category: this.category
+      });
     }
   }));
 
   Alpine.data('interestCalc', () => ({
-    principal: null,
-    rate:      null,
-    time:      null,
-    interest:  0,
-    total:     0,
+    principal:      null,
+    rate:           null,
+    time:           null,
+    touchedP:       false,
+    touchedR:       false,
+    touchedT:       false,
+    interest:       0,
+    total:          0,
+    history:        [],
+
+    // valid when principal>0, rate≥0, time>0
+    get isValid() {
+      return this.principal > 0 && this.rate >= 0 && this.time > 0;
+    },
+
     calculate() {
       const P = this.principal || 0;
-      const r = (this.rate || 0) / 100;
+      const r = (this.rate || 0)/100;
       const t = this.time || 0;
       this.interest = (P * r * t).toFixed(2);
       this.total    = (P + parseFloat(this.interest)).toFixed(2);
+
+      // record into history
+      this.history.push({
+        principal: this.principal.toFixed(2),
+        rate:      this.rate.toFixed(2),
+        time:      this.time.toFixed(2),
+        interest:  this.interest,
+        total:     this.total
+      });
     }
   }));
 });
