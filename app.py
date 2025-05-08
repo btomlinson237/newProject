@@ -18,6 +18,10 @@ def bmi():
 def interest():
     return render_template('interest.html')
 
+@app.route('/split')
+def split():
+    return render_template('split.html')
+
 @app.route('/terms')
 def terms():
     return render_template('terms.html')

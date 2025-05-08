@@ -3,7 +3,6 @@
 // — Alpine component registrations —
 document.addEventListener('alpine:init', () => {
   Alpine.data('tipCalc', () => ({
-    // — state —
     bill:          null,
     pct:           15,
     people:        1,
@@ -13,11 +12,8 @@ document.addEventListener('alpine:init', () => {
     tip:           0,
     total:         0,
     perPerson:     0,
+    history:       [],
 
-    // ← new history array
-    history: [],
-
-    // — validity check —
     get isValid() {
       return (
         this.bill   >  0 &&
@@ -27,7 +23,6 @@ document.addEventListener('alpine:init', () => {
       );
     },
 
-    // — action —
     calculate() {
       this.tip       = (this.bill || 0) * (this.pct / 100);
       this.total     = (this.bill || 0) + this.tip;
@@ -35,7 +30,6 @@ document.addEventListener('alpine:init', () => {
         ? this.total / this.people
         : 0;
 
-      // ← record this result
       this.history.push({
         bill:       this.bill,
         pct:        this.pct,
@@ -47,7 +41,6 @@ document.addEventListener('alpine:init', () => {
     }
   }));
 
-
   Alpine.data('bmiCalc', () => ({
     weight:        null,
     height:        null,
@@ -58,13 +51,11 @@ document.addEventListener('alpine:init', () => {
     category:      '',
     history:       [],
 
-    // valid only when both inputs > 0
     get isValid() {
       return this.weight > 0 && this.height > 0;
     },
 
     calculate() {
-      // compute bmi & category
       let w = this.weight || 0;
       let h = this.height || 0;
       if (this.unit === 'imperial') {
@@ -78,7 +69,6 @@ document.addEventListener('alpine:init', () => {
                        : b < 30   ? 'Overweight'
                        : 'Obese';
 
-      // record into history
       this.history.push({
         weight:   this.weight,
         height:   this.height,
@@ -90,29 +80,27 @@ document.addEventListener('alpine:init', () => {
   }));
 
   Alpine.data('interestCalc', () => ({
-    principal:      null,
-    rate:           null,
-    time:           null,
-    touchedP:       false,
-    touchedR:       false,
-    touchedT:       false,
-    interest:       0,
-    total:          0,
-    history:        [],
+    principal: null,
+    rate:      null,
+    time:      null,
+    touchedP:  false,
+    touchedR:  false,
+    touchedT:  false,
+    interest:  0,
+    total:     0,
+    history:   [],
 
-    // valid when principal>0, rate≥0, time>0
     get isValid() {
       return this.principal > 0 && this.rate >= 0 && this.time > 0;
     },
 
     calculate() {
       const P = this.principal || 0;
-      const r = (this.rate || 0)/100;
+      const r = (this.rate || 0) / 100;
       const t = this.time || 0;
       this.interest = (P * r * t).toFixed(2);
       this.total    = (P + parseFloat(this.interest)).toFixed(2);
 
-      // record into history
       this.history.push({
         principal: this.principal.toFixed(2),
         rate:      this.rate.toFixed(2),
@@ -122,25 +110,82 @@ document.addEventListener('alpine:init', () => {
       });
     }
   }));
+
+  // — Itemized split with line‐item assignment —
+  Alpine.data('itemizedSplit', () => ({
+    taxRate:     8.25,
+    tipRate:     15,
+    peopleInput: '',
+    people:      [],
+    items:       [],
+    shares:      {},
+
+    init() {
+      // 1) parse once on mount
+      this.parsePeople();
+      // 2) re-parse whenever the text changes
+      this.$watch('peopleInput', () => this.parsePeople());
+    },
+
+    addItem() {
+      this.items.push({ desc: '', price: 0, assigned: [] });
+    },
+    removeItem(i) {
+      this.items.splice(i, 1);
+    },
+
+    parsePeople() {
+      // break on commas, trim out empties
+      this.people = this.peopleInput
+        .split(',')
+        .map(s => s.trim())
+        .filter(Boolean);
+
+      // reset any stale assignments
+      this.items.forEach(it => { it.assigned = []; });
+    },
+
+    calculate() {
+      const subtotals = {};
+      this.people.forEach(p => subtotals[p] = 0);
+
+      // allocate each item equally to its assignees
+      this.items.forEach(it => {
+        const n = it.assigned.length;
+        if (!n) return;
+        const per = it.price / n;
+        it.assigned.forEach(p => subtotals[p] += per);
+      });
+
+      const itemTotal = Object.values(subtotals).reduce((a, b) => a + b, 0);
+      const taxAmt    = itemTotal * (this.taxRate / 100);
+      const tipAmt    = itemTotal * (this.tipRate / 100);
+      const grandTotal= itemTotal + taxAmt + tipAmt;
+      const factor    = grandTotal / itemTotal;
+
+      // final per-person share
+      this.people.forEach(p => {
+        this.shares[p] = subtotals[p] * factor;
+      });
+    }
+  }));
 });
 
 // — Theme toggle logic —
-// Moves the <html> between light/dark based on switch & persists in localStorage.
+// Moves the <html> between light/dark based on switch & persists choice.
 (function() {
   const toggle = document.getElementById('themeToggle');
   const root   = document.documentElement;
   const saved  = localStorage.getItem('theme');
 
-  // Initialize on page load
   if (
     saved === 'light' ||
-    ( !saved && window.matchMedia('(prefers-color-scheme: light)').matches )
+    (!saved && window.matchMedia('(prefers-color-scheme: light)').matches)
   ) {
     root.setAttribute('data-theme', 'light');
     if (toggle) toggle.checked = true;
   }
 
-  // If the toggle exists, wire up the change handler
   if (toggle) {
     toggle.addEventListener('change', () => {
       if (toggle.checked) {

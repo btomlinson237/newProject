@@ -180,3 +180,10 @@ html[data-theme="light"] .navbar-nav .nav-link {
 html[data-theme="light"] .form-check-label {
   color: var(--text-secondary) !important;
 }
+
+
+/* Allow multi-select boxes to expand and show options */
+.form-select[multiple] {
+  min-height: 6rem;
+  height: auto !important;
+}
