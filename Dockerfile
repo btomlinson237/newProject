@@ -1,13 +1,16 @@
-FROM python:3.10-slim
+# Dockerfile
+FROM python:3.9-slim
+
+# set workdir
 WORKDIR /app
 
-# Install dependencies
+# copy code & install
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy application code
 COPY . .
 
-# Expose port and run
-EXPOSE 8080
-CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:8080"]
+# tell Cloud Run which port to listen on
+ENV PORT 8080
+
+# use Gunicorn as your WSGI server
+CMD ["python", "-m" , "flask", "run", "--host=0.0.0.0", "--port", "8080"]

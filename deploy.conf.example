@@ -1,0 +1,10 @@
+# deploy.conf
+
+# Google Cloud Project iD
+PROJECT_ID="your-gcloud-project-id"
+
+# The region to deploy
+REGION="us-west2"
+
+# The name for Cloud Run Service
+SERVICE_NAME="calculator-app"

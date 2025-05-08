@@ -1,1 +1,33 @@
-Bobby's Project
+# Bobby's Project
+
+## DEPLOYING LOCALLY
+- create a virtual environment within repo; in command line, run 'python3 -m venv .venv', followed by 'source .venv/bin/activate', followed by 'pip install -r requirements.txt'
+- in command line, run 'chmod +x run.sh'
+- in command line, run './run.sh'
+
+
+
+## DEPLOYING TO GCLOUD RUN
+
+### Setting up Google Cloud SDK
+#### macOS (via Homebrew)
+brew install --cask google-cloud-sdk
+
+#### Debian/Ubuntu
+sudo apt-get update && sudo apt-get install google-cloud-sdk
+
+#### Or follow the instructions here:
+https://cloud.google.com/sdk/docs/install
+
+- in command line, 'run gcloud init'
+-- you'll be prompted to:
+Log in via your browser.
+Select (or create) a GCP project
+Choose a default region/zone (you can override in deploy.conf)
+- run this command to ensure that the required API's are enabled in GCloud
+
+- copy deploy.conf.example to a new file 'deploy.conf', enter your Google Cloud credentials 
+
+- in command line, run 'chmod +x deploy.sh'
+
+- in command line, run './deploy.sh'
