@@ -1,4 +1,6 @@
-# Bobby's Project
+# Bobby's Calculator Project for CS496  
+
+Bobby’s Calculators is a dark-mode Flask application with Alpine.js interactivity, offering Tip & Bill Split, BMI and Simple Interest calculators, plus an advanced itemized bill splitter (with tax, tip & per-person shares).
 
 ## DEPLOYING LOCALLY
 - create a virtual environment within repo; in command line, run 'python3 -m venv .venv', followed by 'source .venv/bin/activate', followed by 'pip install -r requirements.txt'
@@ -31,3 +33,13 @@ Choose a default region/zone (you can override in deploy.conf)
 - in command line, run 'chmod +x deploy.sh'
 
 - in command line, run './deploy.sh'
+
+
+## CONTACT
+For questions or feedback, reach out to Bobby Tomlinson:
+
+✉️ btomlinson237@gmail.com
+
+🔗 https://linkedin.com/in/bobby-tomlinson
+
+🐙 https://github.com/btomlinson237
