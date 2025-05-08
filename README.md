@@ -24,7 +24,7 @@ https://cloud.google.com/sdk/docs/install
 Log in via your browser.
 Select (or create) a GCP project
 Choose a default region/zone (you can override in deploy.conf)
-- run this command to ensure that the required API's are enabled in GCloud
+- run this command to ensure that the required API's are enabled in GCloud: 'gcloud services enable run.googleapis.com \ cloudbuild.googleapis.com'
 
 - copy deploy.conf.example to a new file 'deploy.conf', enter your Google Cloud credentials 
 
